@@ -27,7 +27,7 @@ const handleDownload = () => {
   // Create a link element
   const link = document.createElement('a');
   link.href = resumePDF;
-  link.download = 'Kishan_Solanki_Resume.pdf';
+  link.download = '';
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -113,7 +113,7 @@ const HeroSection = () => {
           >
             <img
               src={profile}
-              alt="Kishan Solanki"
+              alt="Mahfooj Alam"
               className="w-full h-full rounded-full object-cover drop-shadow-[0_10px_20px_rgba(130,69,236,0.5)]"
             />
           </Tilt>
@@ -122,21 +122,19 @@ const HeroSection = () => {
         <div className="md:w-1/2 text-center md:text-left mt-8 md:mt-0">
           {/* Main Headline */}
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-            Hi, I'm Kishan Solanki.
+            Mahfooj Alam.
           </h1>
           
           {/* Skills Heading with Typing Effect */}
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 text-[#8245ec] leading-tight">
-            <span className="text-white">I am a </span>
+            <span className="text-white">I'm </span>
             <TypeAnimation
               sequence={[
-                'Fullstack Developer',
+                'Junior iOS Developer.',
                 1000,
-                'App Developer',
+                'IoT Engineer.',
                 1000,
-                'UI/UX Designer',
-                1000,
-                'Coder',
+                'UI/UX Designer.',
                 1000,
               ]}
               wrapper="span"
@@ -148,7 +146,7 @@ const HeroSection = () => {
 
           {/* Subheading/Role */}
           <p className="text-xl sm:text-2xl md:text-3xl font-light text-gray-400 mb-10 max-w-xl">
-            Full-Stack Developer, AI Enthusiast, and UI/UX Architect.
+            iOS Developer, IoT Enthusiast, and UI/UX Architect.
           </p>
 
           {/* Call-to-Action (CTA) */}

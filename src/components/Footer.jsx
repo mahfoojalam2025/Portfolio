@@ -14,7 +14,7 @@ const Footer = () => {
     <footer className="text-white py-8 px-[12vw] md:px-[7vw] lg:px-[20vw] bg-gray-900">
       <div className="container mx-auto text-center">
         {/* Name / Logo */}
-        <h2 className="text-xl font-semibold text-purple-500">Kishan Solanki</h2>
+        <h2 className="text-xl font-semibold text-purple-500">Mahfooj Alam</h2>
 
         {/* Navigation Links - Responsive */}
         <nav className="flex flex-wrap justify-center space-x-4 sm:space-x-6 mt-4">
@@ -37,8 +37,8 @@ const Footer = () => {
         {/* Social Media Icons - Responsive */}
         <div className="flex flex-wrap justify-center space-x-4 mt-6">
           {[
-            { icon: <FaGithub />, link: "https://github.com/KishanKumarSolanki" },
-            { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/Kishan-Solanki-553b441a4" },
+            { icon: <FaGithub />, link: "https://github.com/mahfoojalam2025" },
+            { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/mahfooj-alam-1a6595377/" },
             
           ].map((item, index) => (
             <a
@@ -55,7 +55,7 @@ const Footer = () => {
 
         {/* Copyright Text */}
         <p className="text-sm text-gray-400 mt-6">
-          © 2025 Kishan Solanki. All rights reserved.
+          © 2025 Mahfooj Alam. All rights reserved.
         </p>
       </div>
     </footer>
