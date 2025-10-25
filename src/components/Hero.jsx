@@ -26,8 +26,8 @@ const ArrowRightIcon = ({ className = 'w-5 h-5' }) => (
 const handleDownload = () => {
   // Create a link element
   const link = document.createElement('a');
-  link.href = resumePDF;
-  link.download = '';
+  // link.href = resumePDF;
+  // link.download = '';
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
