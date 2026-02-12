@@ -1,33 +1,44 @@
 import React, { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Detect scroll and change navbar background
+  // Scroll background effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      const sections = ["about", "skills", "projects", "contact"];
+      const scrollPos = window.scrollY + 100;
+
+      sections.forEach((section) => {
+        const el = document.getElementById(section);
+        if (el) {
+          if (
+            scrollPos >= el.offsetTop &&
+            scrollPos < el.offsetTop + el.offsetHeight
+          ) {
+            setActiveSection(section);
+          }
+        }
+      });
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Smooth scroll function
   const handleMenuItemClick = (sectionId) => {
-    setActiveSection(sectionId);
     setIsOpen(false);
-
     const section = document.getElementById(sectionId);
     if (section) {
-      const navHeight = 80; // Adjust this value based on your navbar height
-      const sectionTop = section.offsetTop - navHeight;
+      const navHeight = 80;
       window.scrollTo({
-        top: sectionTop,
+        top: section.offsetTop - navHeight,
         behavior: "smooth",
       });
     }
@@ -36,108 +47,123 @@ const Navbar = () => {
   const menuItems = [
     { id: "about", label: "About" },
     { id: "skills", label: "Skills" },
-    { id: "work", label: "Projects" },
+    { id: "project", label: "Projects" },
     { id: "contact", label: "Contact" },
   ];
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition duration-300 px-[7vw] md:px-[7vw] lg:px-[20vw] ${
-        isScrolled ? "bg-[#050414] bg-opacity-50 backdrop-blur-md shadow-md" : "bg-transparent"
+      className={`fixed top-0 w-full z-50 transition-all duration-300 px-[7vw] lg:px-[15vw] ${
+        isScrolled
+          ? "bg-[#0a061a]/70 backdrop-blur-xl border-b border-purple-500/20 shadow-lg"
+          : "bg-transparent"
       }`}
     >
       <div className="text-white py-5 flex justify-between items-center">
+
         {/* Logo */}
-        <div className="text-lg font-semibold cursor-pointer">
-          <span className="text-white">Mahfooj </span>
-          <span className="text-white">Alam</span>
+        <div className="text-xl font-bold cursor-pointer tracking-wide">
+          <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+            Mahfooj
+          </span>{" "}
+          Alam
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-8 text-gray-300">
+        <ul className="hidden md:flex space-x-10 text-gray-300 relative">
           {menuItems.map((item) => (
-            <li
-              key={item.id}
-              className={`cursor-pointer hover:text-[#8245ec] ${
-                activeSection === item.id ? "text-[#8245ec]" : ""
-              }`}
-            >
-              <button onClick={() => handleMenuItemClick(item.id)}>
+            <li key={item.id} className="relative group">
+              <button
+                onClick={() => handleMenuItemClick(item.id)}
+                className={`transition duration-300 ${
+                  activeSection === item.id
+                    ? "text-purple-400"
+                    : "hover:text-white"
+                }`}
+              >
                 {item.label}
               </button>
+
+              {/* Animated Underline */}
+              <span
+                className={`absolute left-0 -bottom-1 h-[2px] bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300 ${
+                  activeSection === item.id
+                    ? "w-full"
+                    : "w-0 group-hover:w-full"
+                }`}
+              ></span>
             </li>
           ))}
         </ul>
 
         {/* Social Icons */}
-        <div className="hidden md:flex space-x-4">
-          <a
-            href="https://github.com/mahfoojalam2025"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-300 hover:text-[#8245ec]"
-          >
-            <FaGithub size={24} />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/mahfooj-alam-1a6595377/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-300 hover:text-[#8245ec]"
-          >
-            <FaLinkedin size={24} />
-          </a>
+        <div className="hidden md:flex space-x-5">
+          {[{
+            icon: <FaGithub size={20} />,
+            link: "https://github.com/mahfoojalam2025",
+          },
+          {
+            icon: <FaLinkedin size={20} />,
+            link: "www.linkedin.com/in/mahfooj-alam2008",
+          },
+          {
+            icon: <FaInstagram size={20} />,
+            link: "https://www.instagram.com/mahfooj.decode/",
+          }].map((social, index) => (
+            <a
+              key={index}
+              href={social.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-white transition duration-300 
+              hover:shadow-[0_0_15px_rgba(130,69,236,0.8)] 
+              hover:scale-110 rounded-full"
+            >
+              {social.icon}
+            </a>
+          ))}
         </div>
 
         {/* Mobile Menu Icon */}
         <div className="md:hidden">
           {isOpen ? (
             <FiX
-              className="text-3xl text-[#8245ec] cursor-pointer"
+              className="text-3xl text-purple-500 cursor-pointer"
               onClick={() => setIsOpen(false)}
             />
           ) : (
             <FiMenu
-              className="text-3xl text-[#8245ec] cursor-pointer"
+              className="text-3xl text-purple-500 cursor-pointer"
               onClick={() => setIsOpen(true)}
             />
           )}
         </div>
       </div>
 
-      {/* Mobile Menu Items */}
+      {/* Mobile Dropdown */}
       {isOpen && (
-        <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-4/5 bg-[#050414] bg-opacity-50 backdrop-filter backdrop-blur-lg z-50 rounded-lg shadow-lg md:hidden">
-          <ul className="flex flex-col items-center space-y-4 py-4 text-gray-300">
+        <div className="md:hidden bg-[#0a061a]/95 backdrop-blur-xl border border-purple-500/20 rounded-2xl mt-2 shadow-xl">
+          <ul className="flex flex-col items-center space-y-6 py-8 text-gray-300">
             {menuItems.map((item) => (
-              <li
-                key={item.id}
-                className={`cursor-pointer hover:text-white ${
-                  activeSection === item.id ? "text-[#8245ec]" : ""
-                }`}
-              >
-                <button onClick={() => handleMenuItemClick(item.id)}>
+              <li key={item.id}>
+                <button
+                  onClick={() => handleMenuItemClick(item.id)}
+                  className={`text-lg transition ${
+                    activeSection === item.id
+                      ? "text-purple-400"
+                      : "hover:text-white"
+                  }`}
+                >
                   {item.label}
                 </button>
               </li>
             ))}
-            <div className="flex space-x-4">
-              <a
-                href="https://github.com/mahfoojalam2025"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white"
-              >
-                <FaGithub size={24} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/mahfooj-alam-1a6595377/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white"
-              >
-                <FaLinkedin size={24} />
-              </a>
+
+            {/* Social Icons Mobile */}
+            <div className="flex space-x-6 pt-4">
+              <FaGithub size={22} />
+              <FaLinkedin size={22} />
+              <FaInstagram size={22} />
             </div>
           </ul>
         </div>

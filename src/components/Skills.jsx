@@ -1,66 +1,67 @@
-import React from 'react'
+import React from "react";
 import { SkillsInfo } from "../constants";
-import Tilt from "react-parallax-tilt";
 
 const Skills = () => {
+  const allSkills = SkillsInfo.flatMap((category) => category.skills);
+
   return (
-    <section id="skills" className="min-h-screen w-full bg-gray-950 text-white p-8">
-      <div className="max-w-6xl mx-auto">
-      {/* Section Title */}
-    <div className="text-center mb-8">
-      <h2 className="text-3xl sm:text-4xl font-bold text-white">SKILLS</h2>
-      <div className="w-24 h-1 bg-[#8245ec] mx-auto mt-2"></div>
-      <p className="text-gray-400 mt-4 text-lg font-semibold">
-      A collection of my technical skills and expertise honed through various projects and experiences
-      </p>
-    </div>
+    <section
+      id="skills"
+      className="min-h-screen w-full bg-gray-950 text-white py-24 px-6"
+    >
+      <div className="max-w-7xl mx-auto">
 
-    {/* Skill Categories */}
-    <div className="flex flex-wrap gap-1 lg:gap-5 py-10 justify-between">
-      {SkillsInfo.map((category) => (
-        <div
-          key={category.title}
-          className="bg-gray-900 backdrop-blur-md px-6 sm:px-10 py-8 sm:py-6 mb-10 w-full sm:w-[48%] rounded-2xl border border-white 
-          shadow-[0_0_20px_1px_rgba(130,69,236,0.3)]"
-        >
-          <h3 className="text-2xl sm:text-3xl font-semibold text-gray-400 mb-4 text-center">
-            {category.title}
-          </h3>
-
-          {/* Skill Items - 3 per row on larger screens */}
-          <Tilt
-            key={category.title}
-            tiltMaxAngleX={20}
-            tiltMaxAngleY={20}
-            perspective={1000}
-            scale={1.05}
-            transitionSpeed={1000}
-            gyroscope={true}
-          >
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full">
-              {category.skills.map((skill) => (
-                <div
-                  key={skill.name}
-                  className="flex items-center justify-center space-x-2 bg-transparent border-2 border-gray-700 rounded-3xl py-2 px-2 sm:py-2 sm:px-2 text-center"
-                >
-                  <img
-                    src={skill.logo}
-                    alt={`${skill.name} logo`}
-                    className="w-6 h-6 sm:w-8 sm:h-8"
-                  />
-                  <span className="text-xs sm:text-sm text-gray-300">
-                    {skill.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </Tilt>
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+            My Tech Stack
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mt-4 rounded-full"></div>
+          <p className="text-gray-400 mt-6 max-w-2xl mx-auto">
+            Technologies and tools I use to build scalable and modern applications.
+          </p>
         </div>
-      ))}
-    </div>
+
+        {/* Skills Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+
+          {allSkills.map((skill) => (
+            <div
+              key={skill.name}
+              className="
+                group relative flex flex-col items-center justify-center
+                bg-gray-900 rounded-xl
+                py-6 px-3
+                border border-gray-800
+                transition-all duration-300
+                shadow-[6px_6px_12px_rgba(0,0,0,0.6),-4px_-4px_10px_rgba(255,255,255,0.03)]
+                hover:shadow-[0_10px_30px_rgba(130,69,236,0.6)]
+                hover:-translate-y-2
+                hover:border-purple-500
+              "
+            >
+              {/* Glow Overlay */}
+              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition duration-300 shadow-[0_0_25px_rgba(130,69,236,0.8)]"></div>
+
+              {/* Icon */}
+              <img
+                src={skill.logo}
+                alt={skill.name}
+                className="w-16 h-16 transition duration-300 group-hover:scale-110"
+              />
+
+              {/* Name */}
+              <span className="mt-2 text-sm text-gray-300 group-hover:text-white transition">
+                {skill.name}
+              </span>
+            </div>
+          ))}
+
+        </div>
+
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Skills
+export default Skills;

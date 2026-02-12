@@ -8,6 +8,7 @@ import { ScrollProgress } from "./components/ui/scroll-progress";
 import Project from "./components/Project";
 import Contect from "./components/Contact";
 import Footer from "./components/Footer";
+import Reveal from "./components/ui/Reveal";
 
 function App() {
   return (
@@ -15,12 +16,29 @@ function App() {
       <div>
         <BackgroundRippleEffect />
         <Navbar />
+        <ScrollProgress />
+
+        <Reveal>
         <Hero />
+        </Reveal>
+
+        <Reveal>  
         <BlurBlob position={{ top: '50%', left: '70%' }} size={{ width: '30%', height: '40%' }} />
         <Skills />
+        </Reveal>
+
+        <Reveal>
         <ScrollProgress />
+        </Reveal>
+
+        <Reveal>
         <Project />
+        </Reveal>
+
+        <Reveal>
         <Contect />
+        </Reveal>
+        
         <Footer />
       </div>
     </>
